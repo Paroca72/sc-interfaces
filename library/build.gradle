@@ -29,5 +29,5 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.google.code.ksoap2-android:ksoap2-android:3.4.0'
-    compile 'com.github.Paroca72:ScUtils:0.9-beta'
+    compile 'com.github.paroca72:sc-utils:0.9-beta'
 }
