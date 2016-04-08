@@ -21,7 +21,7 @@ android {
 ...
 dependencies {
     ...
-    compile 'com.github.Paroca72:ScInterfaces:0.9-beta'
+    compile 'com.github.paroca72:sc-interfaces:0.9-beta'
 }
 ```
 
