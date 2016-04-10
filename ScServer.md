@@ -16,9 +16,12 @@ This class improve an **auto-save** method for save permanently the commands que
 If your commands queue is not empty the class restart the queue at next time you will use the application.
 <br />
 
-> DEPENDENCE:<br />
+> **DEPENDENCE:**
 > This class use **ksoap2** to comunicate with the server. 
 
+> **PERMISSION:**
+> This class read over the network and need the INTERNET permission inside your manifest
+> <uses-permission android:name="android.permission.INTERNET"/>
 
 # Documentation
 **First step** is configuring the servers and the web-service "page" name.
@@ -130,6 +133,9 @@ Mostly for internal use this method return if the command will try to execute.
 <code>true</code> if the command executed with success.
 - **boolean isError()**<br />
 <code>true</code> if the command executed with error.
+- **Exception getLastError()**<br />
+In error case the class store the last exception.
+The error will be also written inside the stack trace.
 - **void setCommandListener(CommandListener listener)**<br />
 Apply the listener reference to the command.
 
@@ -203,6 +209,8 @@ command.setCommandListener(new CommandListener() {
         @Override
         public void onError() {
                // The command finish with error.
+               // Note that in exception case the error will written inside the stack
+               // trace and you can access to this by the < getLastError()> method.
                write("An error occured!");
         }
 });

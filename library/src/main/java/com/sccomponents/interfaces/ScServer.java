@@ -280,7 +280,7 @@ public class ScServer extends ScChecker {
             if (!command.willTry()) {
                 // Add this command to spent list to be removed forward but only if the
                 // auto-delete trigger is true
-                if (!command.mAutoDelete) {
+                if (command.mAutoDelete) {
                     toRemove.add(command);
                 }
 
@@ -593,6 +593,7 @@ public class ScServer extends ScChecker {
         protected CommandListener mCommandListener = null;  // Listener linked to the command
         protected int mTryCount = 0;                        // The number of current try
         protected boolean mSuccess = false;                 // If the execution finish successfully
+        protected Exception mLastError = null;              // Holde the last error raised
 
 
         // Constructor
@@ -614,12 +615,17 @@ public class ScServer extends ScChecker {
                 // Execute the command calling the class container < callServerMethod > method
                 // and determine is finish proper or with an server error.
                 value = ScServer.this.callServerMethod(this.mMethodName, this.mParams);
-                // Fix the success
+                // Hold the success
                 this.mSuccess = true;
+                this.mLastError = null;
 
             } catch (Exception e) {
-                // Fix the error
+                // Write the error inside the stack but not throw any exception
+                e.printStackTrace();
+
+                // Hold the error
                 this.mSuccess = false;
+                this.mLastError = e;
             }
 
             // Increase the tries trigger
@@ -697,6 +703,7 @@ public class ScServer extends ScChecker {
         public void reset() {
             this.mTryCount = 0;
             this.mSuccess = false;
+            this.mLastError = null;
         }
 
         // Check if will try to execute the command.
@@ -719,6 +726,11 @@ public class ScServer extends ScChecker {
         // The current error command status
         public boolean isError() {
             return this.isExecuted() && !this.mSuccess;
+        }
+
+        // Get the last error
+        public Exception getLastError() {
+            return this.mLastError;
         }
 
         // Set the listener
@@ -843,7 +855,7 @@ public class ScServer extends ScChecker {
         // Check if a command must be to execute.
         @SuppressWarnings("unused")
         public boolean needToExecute() {
-            return !this.willTry() && this.mNextExecution <= this.now();
+            return this.willTry() && this.mNextExecution <= this.now();
         }
 
 
