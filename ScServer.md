@@ -222,7 +222,7 @@ server.addCommand(command, true);
 // server.addCommand(command);
 // server.start();
 //
-// Start to check if needed only one time and only in case of schedule commands.
+// Start to check is needed only one time and only in case of schedule commands.
 // Note that is not important start the check after or before insert the commands in queue.
 
 ```
