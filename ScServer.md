@@ -282,7 +282,7 @@ server.addCommand(command, true);
 
 In this case we may suppose to manage a chat.
 Suppose to send 3 messages A, B and C. 
-The messages settings is, in fail case, to retry the command after 10 seconds.
+The messages settings, in fail case, to retry the command after 10 seconds.
 Now suppose the first command (A) failed but the other command B and C will send with success.
 By start settings the command A will be resend after 10 seconds and this time it will go proper.
 In this case the final user see the message in a wrong sequence: B, C, A.
