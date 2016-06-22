@@ -7,18 +7,19 @@ A useful interface between your application and a web-service on server.
 # Usage
 
 via Gradle:
+<br />
+Add it in your root build.gradle at the end of repositories:
 ```java
-android {
-    ...
-    buildTypes {
-        ...
-        repositories {
-            ...
-            maven { url "https://jitpack.io" }
-        }
-    }
+allprojects {
+	repositories {
+		...
+		maven { url "https://jitpack.io" }
+	}
 }
-...
+```
+
+Add the dependency
+```java
 dependencies {
     ...
     compile 'com.github.paroca72:sc-interfaces:1.0-RC'
